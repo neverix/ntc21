@@ -1,0 +1,18 @@
+[[source]]
+name = "pypi"
+url = "https://pypi.org/simple"
+verify_ssl = true
+
+[dev-packages]
+
+[packages]
+mediapipe = "*"
+pyuserinput = "*"
+pyserial = "*"
+pandas = "*"
+matplotlib = "*"
+tk = "*"
+scikit-learn = "*"
+
+[requires]
+python_version = "3.8"
