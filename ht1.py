@@ -1,7 +1,8 @@
 import serial
 import time
 # import cv2
-arduino = serial.Serial(port='/dev/ttyACM0', baudrate=115200, timeout=.1)
+arduino = serial.Serial(port='/dev/cu.SLAB_USBtoUART',
+                        baudrate=1000000)
 d = []
 #sudo chmod a+rw /dev/ttyACM0
 
@@ -13,17 +14,12 @@ try:
         # name = 'cam'
         # _, image = cap.read()
         try:
-            c = []
-            for _ in range(3):
-                n = int(arduino.readline())
-                if n >= 0:
-                    continue
-                a = -n - 1
-                b = int(arduino.readline())
-                c.append((a, b))
-            c.sort()
+            c = {i: e for i, e in enumerate(list(map(int, arduino.readline().decode(
+                'utf-8').strip().split(';'))))}
             c.append(("time", time.time()))
             d.append((dict(c)))
+        except TypeError:
+            pass
         except ValueError:
             pass
         # cv2.imshow("img", cv2.flip(annotated_image, 1))
